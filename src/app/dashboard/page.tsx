@@ -1,3 +1,4 @@
+import { verifyToken } from "@/libs/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -7,6 +8,11 @@ const Dashboard = async () => {
     const token = cookieStore.get("token");
 
     if(!token){
+        redirect("/login");
+    }
+
+    const payload = await verifyToken(token.value);
+    if(!payload){
         redirect("/login");
     }
 
