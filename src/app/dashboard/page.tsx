@@ -3,6 +3,16 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { LogoutButton } from "./logoutButton";
 import { TransactionsItem } from "./transactionItem";
+import { RevenueForm } from "./revenueForm";
+
+type Revenue = {
+    id: number;
+    description: string;
+    value: string;
+    category: string;
+    date: string;
+};
+
 
 const Dashboard = async () => {
 
@@ -18,23 +28,13 @@ const Dashboard = async () => {
         redirect("/login");
     }
 
-    const transactions = [
-        {
-            description: "Salário",
-            date: "10/08/2026",
-            value: "+ R$ 2.500,00",
+    const response = await fetch("http://localhost:3001/revenues", {
+        headers: {
+            Authorization: `Bearer ${token.value}`,
         },
-        {
-            description: "Mercado",
-            date: "09/08/2026",
-            value: "- R$ 250,00",
-        },
-        {
-            description: "Internet",
-            date: "08/08/2026",
-            value: "- R$ 100,00",
-        },
-    ]
+    });
+    const revenues: Revenue[] = await response.json();
+
 
 
     return (
@@ -82,18 +82,20 @@ const Dashboard = async () => {
                     </div>
                 </section>
 
+                <RevenueForm />
+
                 <section className="mt-8">
                     <h2 className="text-xl font-semibold text-center">
                         Ultimas movimentações
                     </h2>
 
-                    <div className="mt-4 max-w-5xl rounded-xl border p-6 mx-auto">
-                        {transactions.map((transactions) => (
+                    <div className="mt-4 max-w-4xl rounded-xl border p-6 mx-auto">
+                        {revenues.map((revenue) => (
                             <TransactionsItem
-                                key={transactions.description}
-                                description={transactions.description}
-                                date={transactions.date}
-                                value={transactions.value}
+                                key={revenue.id}
+                                description={revenue.description}
+                                date={revenue.date}
+                                value={`+ R$ ${revenue.value}`}
                             />
                         ))}
                     </div>

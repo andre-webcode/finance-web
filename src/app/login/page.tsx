@@ -1,10 +1,13 @@
 
 "use client"
 
+import { useRouter } from "next/navigation";
+import { Router } from "next/router";
 import { useState } from "react";
 
 
 const Login = () => {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,8 +28,11 @@ const Login = () => {
 
             const data = await response.json();
 
-            console.log("status", response.status);
-            console.log("resposta", data);
+            if (!response.ok) {
+                return;
+            }
+    
+            router.push("/dashboard");
 
         } catch (error) {
             console.log('Erro:', error)
