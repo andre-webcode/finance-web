@@ -14,6 +14,10 @@ type Revenue = {
 };
 
 
+const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString("pt-BR");
+}
+
 const Dashboard = async () => {
 
     const cookieStore = await cookies();
@@ -33,13 +37,16 @@ const Dashboard = async () => {
             Authorization: `Bearer ${token.value}`,
         },
     });
+
     const revenues: Revenue[] = await response.json();
+
+    console.log(revenues);
 
 
 
     return (
-        <main className="min-h-screen">
-            <div className="mx-auto w-full max-w-7xl px-4">
+        <main className="min-h-screen bg-gray-400">
+            <div className="mx-auto max-w-6xl px-4 border border-red-400">
                 <header className="flex items-center justify-between py-6">
                     <h1 className="text-2xl font-bold">Finance</h1>
 
@@ -84,17 +91,17 @@ const Dashboard = async () => {
 
                 <RevenueForm />
 
-                <section className="mt-8">
+                <section className="w-full mt-8 mb-10">
                     <h2 className="text-xl font-semibold text-center">
                         Ultimas movimentações
                     </h2>
 
-                    <div className="mt-4 max-w-4xl rounded-xl border p-6 mx-auto">
+                    <div className="mt-4 rounded-xl border p-6 mx-auto">
                         {revenues.map((revenue) => (
                             <TransactionsItem
                                 key={revenue.id}
                                 description={revenue.description}
-                                date={revenue.date}
+                                date={formatDate(revenue.date)}
                                 value={`+ R$ ${revenue.value}`}
                             />
                         ))}
@@ -103,8 +110,6 @@ const Dashboard = async () => {
                 </section>
 
             </div>
-
-
         </main>
     )
 };
