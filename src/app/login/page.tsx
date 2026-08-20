@@ -40,8 +40,8 @@ const Login = () => {
     }
 
     return (
-        <main className="min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-sm rounded-xl p-8 shadow-lg border ">
+        <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-zinc-950 via-zinc-900 to-purple-950">
+            <div className="w-full max-w-sm rounded-2xl p-8 bg-zinc-900/80 border border-zinc-800 shadow-xl">
                 <h1 className="text-3xl font-bold text-center mb-6">
                     Login
                 </h1>
@@ -54,19 +54,19 @@ const Login = () => {
                         placeholder="E-mail"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2"
                     />
 
                     <input type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2"
 
                     />
 
                     <button
-                        className="w-full rounded-lg py-2 font-semibold bg-blue-600 text-white hover:bg-blue-700"
+                        className="bg-purple-600 hover:bg-purple-700 w-full rounded-lg py-2 font-semibold text-white"
                         type="submit">
                         Entrar
                     </button>

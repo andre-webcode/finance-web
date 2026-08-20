@@ -44,50 +44,86 @@ export const RevenueForm = () => {
 
     return (
         <section className="mt-8">
-            <h2 className="text-xl font-semibold text-center">
+            <h2 className="text-xl font-semibold text-center text-zinc-100">
                 Nova receita
             </h2>
             <form
                 onSubmit={handleSubmit}
-                className="mt-4 flex w-full flex-col items-center  rounded-xl border p-6 shadow-sm md:flex-row md:p-4">
-                <div className="w-full flex flex-col items-center gap-3 sm:flex-row">
-                    <input
-                        id="description"
-                        type="text"
-                        placeholder="Descrição"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        className="w-full outline-none border px-2 py-2 rounded-lg overflow-hidden  sm:flex-1"
-                    />
+                className="mt-4 flex w-full flex-col items-center  rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm md:flex-row md:p-4">
 
-                    <input type="number"
-                        id="value"
-                        placeholder="2500"
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
-                    />
+                <div className="w-full flex flex-col items-center gap-3 sm:flex-row ">
+                    
+                    <div className="w-full flex flex-col md:flex-1">
+                        <label
+                            htmlFor="description"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Descrição
+                        </label>
+                        <input
+                            id="description"
+                            type="text"
+                            placeholder="Descrição"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="w-full outline-none border px-2 py-2 rounded-lg overflow-hidden  sm:flex-1"
+                        />
+                    </div>
 
-                    <input
-                        id="category"
-                        type="text"
-                        placeholder="Ex: Salário"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="w-ful rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
-                    />
+                    <div className="flex w-full flex-col sm:w-32 md:w-36">
+                        <label
+                            htmlFor="value"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Valor
+                        </label>
+                        <input type="number"
+                            id="value"
+                            placeholder="2500"
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
+                        />
+                    </div>
 
-                    <input
-                        id="date"
-                        type="date"
-                        value={date}
-                        onChange={(e) => setDate(e.target.value)}
-                        className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
-                    />
+                    <div className="flex w-full flex-col sm:w-32 md:w-36">
+                        <label
+                            htmlFor="category"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Categoria
+                        </label>
+                        <input
+                            id="category"
+                            type="text"
+                            placeholder="Ex: Salário"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
+                        />
+                    </div>
+
+                    <div className="flex w-full flex-col sm:w-28 md:w-36">
+                        <label
+                            htmlFor="date"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Data
+                        </label>
+
+                        <input
+                            id="date"
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-2 text-zinc-100 outline-none focus:border-purple-500 sm:w-28 md:w-36 [&::-webkit-calendar-picker-indicator]:invert"
+                        />
+                    </div>
+
                 </div>
 
-                <div>
-                    <button type="submit" className="bg-blue-600 p-2 px-4 rounded-md mt-4 font-semibold text-white hover:bg-blue-700 md:m-0 md:ml-3">
+                <div className="mt-4 md:ml-3 md:mt-0 md:self-end">
+                    <button type="submit" className="bg-purple-600 hover:bg-purple-700 p-2 px-4 rounded-md mt-4 font-semibold text-white md:m-0 md:ml-3">
                         Adicionar
                     </button>
                 </div>
