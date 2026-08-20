@@ -122,7 +122,7 @@ export const RevenueForm = () => {
 
                 </div>
 
-                <div className="mt-4 md:ml-3 md:mt-0 md:self-end">
+                <div className="flex md:mt-0 md:self-end">
                     <button type="submit" className="bg-purple-600 hover:bg-purple-700 p-2 px-4 rounded-md mt-4 font-semibold text-white md:m-0 md:ml-3">
                         Adicionar
                     </button>

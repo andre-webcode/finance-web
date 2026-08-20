@@ -1,0 +1,136 @@
+"use client"
+
+import { useState } from "react"
+
+export const ExpenseForm = () => {
+    const [description, setDescription] = useState("");
+    const [value, setValue] = useState("");
+    const [category, setCategory] = useState("");
+    const [date, setDate] = useState("");
+
+    const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (!date) {
+            console.log("Selecione uma data");
+            return;
+        }
+
+        try {
+            const formattedDate = new Date(`${date}T00:00:00`).toISOString();
+
+            const res = await fetch("/api/expenses", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    description,
+                    value,
+                    category,
+                    date: formattedDate,
+                }),
+            });
+
+            const data = await res.json();
+
+            console.log("status:", res.status);
+            console.log("resposta:", data);
+
+        } catch (error) {
+            console.error("Erro ao criar despesa:", error);
+        }
+    };
+
+    return (
+        <section className="mt-8">
+            <h2 className="text-xl font-semibold text-center text-zinc-100">
+                Nova despesa
+            </h2>
+
+            <form
+                onSubmit={handleSubmit}
+                className="mt-4 flex w-full flex-col items-center rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm md:flex-row md:p-4"
+            >
+                <div className="w-full flex flex-col items-center gap-3 sm:flex-row">
+
+                    <div className="w-full flex flex-col md:flex-1">
+                        <label
+                            htmlFor="description"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Descrição
+                        </label>
+                        <input
+                            id="description"
+                            type="text"
+                            placeholder="Descrição"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            className="w-full outline-none border px-2 py-2 rounded-lg overflow-hidden sm:flex-1"
+                        />
+                    </div>
+
+                    <div className="flex w-full flex-col sm:w-32 md:w-36">
+                        <label
+                            htmlFor="value"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Valor
+                        </label>
+                        <input
+                            type="number"
+                            id="value"
+                            placeholder="100"
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                            className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
+                        />
+                    </div>
+
+                    <div className="flex w-full flex-col sm:w-32 md:w-36">
+                        <label
+                            htmlFor="category"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Categoria
+                        </label>
+                        <input
+                            id="category"
+                            type="text"
+                            placeholder="Ex: Mercado"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full rounded-lg border px-2 py-2 outline-none sm:w-28 md:w-36"
+                        />
+                    </div>
+
+                    <div className="flex w-full flex-col sm:w-28 md:w-36">
+                        <label
+                            htmlFor="date"
+                            className="mb-2 block text-sm font-medium text-zinc-300"
+                        >
+                            Data
+                        </label>
+                        <input
+                            id="date"
+                            type="date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                            className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-2 outline-none focus:border-purple-500 sm:w-28 md:w-36 [&::-webkit-calendar-picker-indicator]:invert"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex md:mt-0 md:self-end">
+                    <button
+                        type="submit"
+                        className="bg-purple-600 hover:bg-purple-700 p-2 px-4 rounded-md mt-4 font-semibold text-white md:m-0 md:ml-3"
+                    >
+                        Adicionar
+                    </button>
+                </div>
+            </form>
+        </section>
+    );
+};
