@@ -1,35 +1,73 @@
-export const SideBar = () => {
+"use client"
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LayoutDashboard, Wallet, Receipt } from "lucide-react";
+import { LogoutButton } from "./logoutButton";
+
+type Props = {
+    isOpen: boolean;
+}
+
+export const SideBar = ({ isOpen }: Props) => {
+    const pathname = usePathname();
+
+    const navItems = [
+        {
+            name: "Dashboard",
+            href: "/dashboard",
+            icon: LayoutDashboard,
+        },
+        {
+            name: "Receitas",
+            href: "/dashboard/revenues",
+            icon: Wallet,
+        },
+        {
+            name: "Despesas",
+            href: "/dashboard/expenses",
+            icon: Receipt,
+        },
+    ]
+
     return (
-        <aside className="w-64 border-r border-zinc-800 p-6 text-white">
+        <aside className={`sticky top-0 flex h-screen flex-col w-64 border-r border-zinc-800 p-6 text-white transition-transform duration-300
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
             <h2 className="text-xl font-bold text-purple-400">
                 Finance
             </h2>
 
             <nav className="mt-8">
                 <ul className="space-y-2">
-                    <li>
-                        <a
-                            className="block rounded-lg px-3 py-2 hover:bg-zinc-800"
-                            href="/dashboard">
-                            Dashboard
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            className="block rounded-lg px-3 py-2 hover:bg-zinc-800"
-                            href="/dashboard/revenues">
-                            Receitas
-                        </a>
-                    </li>
-                    <li>
-                        <a
-                            className="block rounded-lg px-3 py-2 hover:bg-zinc-800"
-                            href="/dashboard/expenses">
-                            Despesas
-                        </a>
-                    </li>
+
+                    {navItems.map((item) => {
+                        const Icon = item.icon;
+
+                        return (
+                            <li key={item.href}>
+                                <Link
+                                    href={item.href}
+                                    className={`flex items-center gap-3 rounded-lg px-3 py-2 ${pathname === item.href
+                                        ? "bg-purple-600"
+                                        : "hover:bg-zinc-800"
+                                        }`}
+                                >
+                                    <Icon size={20} />
+
+                                    <span>{item.name}</span>
+                                </Link>
+                            </li>
+                        );
+                    })}
+
+
                 </ul>
             </nav>
+
+            <div className="mt-auto">
+                <LogoutButton />
+            </div>
+           
         </aside>
     )
 }
