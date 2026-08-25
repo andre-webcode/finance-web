@@ -65,7 +65,7 @@ const Dashboard = async () => {
                             </div>
                         </header>
 
-                        <section className="grid gap-4 md:grid-cols-3">
+                        <section className="grid gap-4 lg:grid-cols-3">
                             <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 ">
                                 <p className="text-sm text-gray-500">
                                     Saldo atual

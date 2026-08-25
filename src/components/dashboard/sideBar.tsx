@@ -31,8 +31,8 @@ export const SideBar = ({ isOpen }: Props) => {
     ]
 
     return (
-        <aside className={`sticky top-0 flex h-screen flex-col w-64 border-r border-zinc-800 p-6 text-white transition-transform duration-300
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <aside className={`fixed left-0 top-0 z-50 flex h-screen flex-col w-64 border-r  border-zinc-800 p-6 bg-zinc-950 text-white transition-transform duration-300
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
             <h2 className="text-xl font-bold text-purple-400">
                 Finance
             </h2>
