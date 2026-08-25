@@ -14,7 +14,13 @@ type Revenue = {
     category: string;
     date: string;
 };
-
+type Expense = {
+    id: number;
+    description: string;
+    value: string;
+    category: string;
+    date: string;
+};
 
 const formatDate = (date: string) => {
     return new Date(date).toLocaleDateString("pt-BR");
@@ -42,88 +48,93 @@ const Dashboard = async () => {
 
     const revenues: Revenue[] = await response.json();
 
-    console.log(revenues);
+    const expenseResponse = await fetch("http://localhost:3001/expense", {
+        headers: {
+            Authorization: `Bearer ${token.value}`,
+        },
+    });
 
+    const expenses: Expense[] = await expenseResponse.json();
 
 
     return (
         <main className="min-h-screen bg-zinc-950 text-white">
-            
-                <DashboardLayout>
 
-                    <div className=" mx-auto max-w-6xl px-4">
-                        <header className="flex items-center justify-between border-b border-zinc-800 py-6">
+            <DashboardLayout>
 
-                            <h1 className="text-2xl font-bold text-purple-400">Finance</h1>
+                <div className=" mx-auto max-w-6xl px-4">
+                    <header className="flex items-center justify-between border-b border-zinc-800 py-6">
 
-                            <div className="flex items-center gap-4">
-                                <span className="text-sm text-zinc-400">
-                                    {String(payload.email)}
-                                </span>
+                        <h1 className="text-2xl font-bold text-purple-400">Finance</h1>
 
-                                <LogoutButton />
-                            </div>
-                        </header>
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm text-zinc-400">
+                                {String(payload.email)}
+                            </span>
 
-                        <section className="grid gap-4 lg:grid-cols-3">
-                            <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 ">
-                                <p className="text-sm text-gray-500">
-                                    Saldo atual
-                                </p>
-                                <strong className="mt-2 block text-3xl font-bold text-purple-400">
-                                    R$ 0,00
-                                </strong>
-                                <p className="mt-1 text-sm text-zinc-500">
-                                    Suas finanças em um só lugar
-                                </p>
-                            </div>
+                            <LogoutButton />
+                        </div>
+                    </header>
 
-                            <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-                                <p className="text-sm text-zinc-400">
-                                    Receitas
-                                </p>
-                                <strong className="mt-2 block text-2xl font-bold text-green-400">
-                                    R$ 0,00
-                                </strong>
-                            </div>
+                    <section className="grid gap-4 lg:grid-cols-3">
+                        <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 ">
+                            <p className="text-sm text-gray-500">
+                                Saldo atual
+                            </p>
+                            <strong className="mt-2 block text-3xl font-bold text-purple-400">
+                                R$ 0,00
+                            </strong>
+                            <p className="mt-1 text-sm text-zinc-500">
+                                Suas finanças em um só lugar
+                            </p>
+                        </div>
 
-                            <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-                                <p className="text-sm text-gray-500">
-                                    Despesas
-                                </p>
-                                <strong className="mt-2 block text-2xl font-bold text-red-400">
-                                    R$ 0,00
-                                </strong>
-                            </div>
-                        </section>
+                        <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+                            <p className="text-sm text-zinc-400">
+                                Receitas
+                            </p>
+                            <strong className="mt-2 block text-2xl font-bold text-green-400">
+                                R$ 0,00
+                            </strong>
+                        </div>
 
-                        <RevenueForm />
+                        <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
+                            <p className="text-sm text-gray-500">
+                                Despesas
+                            </p>
+                            <strong className="mt-2 block text-2xl font-bold text-red-400">
+                                R$ 0,00
+                            </strong>
+                        </div>
+                    </section>
 
-                        <ExpenseForm />
+                    <RevenueForm />
 
-                        <hr className="my-8 border-zinc-800" />
+                    <ExpenseForm />
 
-                        <section className="w-full mt-8 mb-10">
-                            <h2 className="text-xl font-semibold text-center text-zinc-100">
-                                Ultimas movimentações
-                            </h2>
+                    <hr className="my-8 border-zinc-800" />
 
-                            <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6 mx-auto">
-                                {revenues.map((revenue) => (
-                                    <TransactionsItem
-                                        key={revenue.id}
-                                        description={revenue.description}
-                                        date={formatDate(revenue.date)}
-                                        value={`+ R$ ${revenue.value}`}
-                                    />
-                                ))}
-                            </div>
+                    <section className="w-full mt-8 mb-10">
+                        <h2 className="text-xl font-semibold text-center text-zinc-100">
+                            Ultimas movimentações
+                        </h2>
 
-                        </section>
+                        <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6 mx-auto">
+                            {revenues.map((revenue) => (
+                                <TransactionsItem
+                                    key={revenue.id}
+                                    description={revenue.description}
+                                    date={formatDate(revenue.date)}
+                                    value={`+ R$ ${revenue.value}`}
+                                />
+                            ))}
+                        </div>
 
-                    </div>
-                </DashboardLayout>
-            
+                    </section>
+
+                </div>
+            </DashboardLayout>
+
         </main>
     )
 };
