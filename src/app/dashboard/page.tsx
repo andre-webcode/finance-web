@@ -1,3 +1,5 @@
+
+
 import { verifyToken } from "@/libs/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -154,6 +156,7 @@ const Dashboard = async () => {
                             {latestTransactions.map((transaction) => (
                                 <TransactionsItem
                                     key={`${transaction.type}-${transaction.id}`}
+                                    id={transaction.id}
                                     description={transaction.description}
                                     date={formatDate(transaction.date)}
                                     value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
