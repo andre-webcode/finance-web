@@ -82,6 +82,12 @@ const Dashboard = async () => {
         })),
     ];
 
+    transactions.sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+
+    const latestTransactions = transactions.slice(0, 5);
+
     return (
         <main className="min-h-screen bg-zinc-950 text-white">
 
@@ -145,14 +151,14 @@ const Dashboard = async () => {
                         </h2>
 
                         <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6 mx-auto">
-                            {transactions.map((transaction) => (
+                            {latestTransactions.map((transaction) => (
                                 <TransactionsItem
                                     key={`${transaction.type}-${transaction.id}`}
                                     description={transaction.description}
                                     date={formatDate(transaction.date)}
                                     value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
                                     type={transaction.type}
-                                   
+
                                 />
                             ))}
                         </div>
