@@ -23,7 +23,9 @@ type Expense = {
 };
 
 const formatDate = (date: string) => {
+
     return new Date(date).toLocaleDateString("pt-BR");
+
 }
 
 const Dashboard = async () => {
@@ -55,7 +57,30 @@ const Dashboard = async () => {
     });
 
     const expenses: Expense[] = await expenseResponse.json();
+    console.log("EXPENSES:", expenses);
 
+    const totalRevenue = revenues.reduce(
+        (total, revenue) => total + Number(revenue.value),
+        0
+    );
+
+    const totalExpense = expenses.reduce(
+        (total, expense) => total + Number(expense.value),
+        0
+    );
+
+    const balance = totalRevenue - totalExpense;
+
+    const transactions = [
+        ...revenues.map((revenue) => ({
+            ...revenue,
+            type: "revenue" as const,
+        })),
+        ...expenses.map((expense) => ({
+            ...expense,
+            type: "expense" as const,
+        })),
+    ];
 
     return (
         <main className="min-h-screen bg-zinc-950 text-white">
@@ -82,7 +107,7 @@ const Dashboard = async () => {
                                 Saldo atual
                             </p>
                             <strong className="mt-2 block text-3xl font-bold text-purple-400">
-                                R$ 0,00
+                                R$ {balance.toFixed(2)}
                             </strong>
                             <p className="mt-1 text-sm text-zinc-500">
                                 Suas finanças em um só lugar
@@ -94,7 +119,7 @@ const Dashboard = async () => {
                                 Receitas
                             </p>
                             <strong className="mt-2 block text-2xl font-bold text-green-400">
-                                R$ 0,00
+                                R$ {totalRevenue.toFixed(2)}
                             </strong>
                         </div>
 
@@ -103,7 +128,7 @@ const Dashboard = async () => {
                                 Despesas
                             </p>
                             <strong className="mt-2 block text-2xl font-bold text-red-400">
-                                R$ 0,00
+                                R$ {totalExpense.toFixed(2)}
                             </strong>
                         </div>
                     </section>
@@ -120,12 +145,14 @@ const Dashboard = async () => {
                         </h2>
 
                         <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6 mx-auto">
-                            {revenues.map((revenue) => (
+                            {transactions.map((transaction) => (
                                 <TransactionsItem
-                                    key={revenue.id}
-                                    description={revenue.description}
-                                    date={formatDate(revenue.date)}
-                                    value={`+ R$ ${revenue.value}`}
+                                    key={`${transaction.type}-${transaction.id}`}
+                                    description={transaction.description}
+                                    date={formatDate(transaction.date)}
+                                    value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
+                                    type={transaction.type}
+                                   
                                 />
                             ))}
                         </div>

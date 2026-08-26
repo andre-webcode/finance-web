@@ -2,9 +2,10 @@ type Props = {
     description: string;
     date: string;
     value: string;
+    type: "revenue" | "expense";
 }
 
-export const TransactionsItem = ({ description, date, value }: Props) => {
+export const TransactionsItem = ({ description, date, value, type }: Props) => {
     return (
         <div className="mt-3 rounded-lg border px-4 py-3">
             <div className="flex items-center justify-between">
@@ -18,7 +19,7 @@ export const TransactionsItem = ({ description, date, value }: Props) => {
                     </span>
                 </div>
 
-                <strong>
+                <strong className={type === "revenue" ? "text-green-400" : "text-red-400"}>
                     {value}
                 </strong>
             </div>

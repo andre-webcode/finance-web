@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 
 export const RevenueForm = () => {
@@ -7,17 +8,22 @@ export const RevenueForm = () => {
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
     const [date, setDate] = useState("");
+    const router = useRouter();
 
     const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!date) {
-            console.log("Selecione uma data");
+           alert("informe a data");
             return;
         }
-
+        
+       
         try {
-            const formattedDate = new Date(`${date}T00:00:00`).toISOString();
+            const formattedDate = new Date(`${date}T00:00:00`);
+           
+
+           
             const res = await fetch("/api/revenues", {
                 method: 'POST',
                 headers: {
@@ -35,6 +41,10 @@ export const RevenueForm = () => {
             const data = await res.json();
             console.log("status:", res.status);
             console.log("resposta:", data);
+
+            if (res.ok) {
+                router.refresh();
+            }
 
         } catch (error) {
             console.error("Erro ao criar receita:", error);
@@ -103,7 +113,7 @@ export const RevenueForm = () => {
                         />
                     </div>
 
-                    <div className="flex w-full flex-col sm:w-24 md:w-28 lg:w-36">
+                    <div className="flex w-full flex-col sm:w-32 md:w-32 lg:w-36">
                         <label
                             htmlFor="date"
                             className="mb-2 block text-sm font-medium text-zinc-300"
