@@ -2,8 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react"
+import { Revenue } from "@/types/finance";
 
-export const RevenueForm = () => {
+type Props = {
+    onRevenueCreated: (revenue: Revenue) => void;
+};
+
+export const RevenueForm = ({ onRevenueCreated }: Props) => {
     const [description, setDescription] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
@@ -42,9 +47,11 @@ export const RevenueForm = () => {
             console.log("status:", res.status);
             console.log("resposta:", data);
 
-            if (res.ok) {
-                router.refresh();
+            if (!res.ok) {
+                return;
             }
+            
+            onRevenueCreated(data);
 
         } catch (error) {
             console.error("Erro ao criar receita:", error);

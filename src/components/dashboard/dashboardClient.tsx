@@ -24,6 +24,13 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     const [revenuesState, setRevenuesState] = useState(revenues);
     const [expensesState, setExpensesState] = useState(expenses);
 
+    const handleRevenueCreated = (revenue: Revenue) => {
+        setRevenuesState((currentRevenues) => [
+            ...currentRevenues,
+            revenue,
+        ]);
+    }
+
     const handleExpenseCreated = (expense: Expense) => {
 
         setExpensesState((currentExpenses) => [
@@ -47,7 +54,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
 
-    const latestTransactions = transactions.slice(0,5);
+    const latestTransactions = transactions.slice(0, 5);
 
     const totalRevenue = revenuesState.reduce(
         (total, revenue) => total + Number(revenue.value),
@@ -61,6 +68,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
     const balance = totalRevenue - totalExpense;
 
+  
     return (
         <div className=" mx-auto max-w-6xl px-4">
             <header className="flex items-center justify-between border-b border-zinc-800 py-6">
@@ -108,7 +116,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                 </div>
             </section>
 
-            <RevenueForm />
+            <RevenueForm onRevenueCreated={handleRevenueCreated} />
 
             <ExpenseForm onExpenseCreated={handleExpenseCreated} />
 
