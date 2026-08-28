@@ -27,7 +27,6 @@ export const DeleteButton = ({ id, type }: Props) => {
 
     return (
         <button
-            type="button"
             onClick={handleDelete}
             className="cursor-point"
         >

@@ -1,8 +1,13 @@
 "use client"
 
+import { Expense } from "@/types/finance";
 import { useState } from "react"
 
-export const ExpenseForm = () => {
+type Props = {
+    onExpenseCreated: (expense: Expense) => void;
+};
+
+export const ExpenseForm = ({ onExpenseCreated }: Props) => {
     const [description, setDescription] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
@@ -36,6 +41,12 @@ export const ExpenseForm = () => {
 
             console.log("status:", res.status);
             console.log("resposta:", data);
+
+            if (!res.ok) {
+                return;
+            }
+            
+            onExpenseCreated(data);
 
         } catch (error) {
             console.error("Erro ao criar despesa:", error);
