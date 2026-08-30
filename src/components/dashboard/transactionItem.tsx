@@ -6,9 +6,10 @@ type Props = {
     date: string;
     value: string;
     type: "revenue" | "expense";
+    onDeleted: (id: number, type: "revenue" | "expense") => void;
 }
 
-export const TransactionsItem = ({ id, description, date, value, type }: Props) => {
+export const TransactionsItem = ({ id, description, date, value, type,onDeleted }: Props) => {
 
 
 
@@ -32,6 +33,7 @@ export const TransactionsItem = ({ id, description, date, value, type }: Props) 
                 <DeleteButton
                     id={id}
                     type={type}
+                    onDeleted={onDeleted}
                 />
             </div>
         </div>

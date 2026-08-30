@@ -3,10 +3,6 @@
 import { verifyToken } from "@/libs/auth";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { LogoutButton } from "../../components/dashboard/logoutButton";
-import { TransactionsItem } from "../../components/dashboard/transactionItem";
-import { RevenueForm } from "../../components/dashboard/revenueForm";
-import { ExpenseForm } from "../../components/dashboard/expenseForm";
 import { DashboardLayout } from "@/components/dashboard/dashboardLayout";
 import { DashboardClient } from "@/components/dashboard/dashboardClient";
 
@@ -57,11 +53,7 @@ const Dashboard = async () => {
     });
 
     const expenses: Expense[] = await expenseResponse.json();
-    console.log("EXPENSES:", expenses);
 
-   
-
-    
 
     return (
         <main className="min-h-screen bg-zinc-950 text-white">

@@ -39,6 +39,20 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
         ]);
     };
 
+    const handleDeleted = (id: number, type: "revenue" | "expense") => {
+
+        if (type === "revenue") {
+            setRevenuesState((currentRevenues) =>
+                currentRevenues.filter((revenue) => revenue.id !== id)
+            );
+        } else {
+            setExpensesState((currentExpenses) =>
+                currentExpenses.filter((expense) => expense.id !== id)
+            );
+        }
+    };
+
+
     const transactions = [
         ...revenuesState.map((revenue) => ({
             ...revenue,
@@ -56,6 +70,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
     const latestTransactions = transactions.slice(0, 5);
 
+
     const totalRevenue = revenuesState.reduce(
         (total, revenue) => total + Number(revenue.value),
         0
@@ -68,7 +83,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
     const balance = totalRevenue - totalExpense;
 
-  
+
     return (
         <div className=" mx-auto max-w-6xl px-4">
             <header className="flex items-center justify-between border-b border-zinc-800 py-6">
@@ -136,6 +151,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                             date={formatDate(transaction.date)}
                             value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
                             type={transaction.type}
+                            onDeleted={handleDeleted}
 
                         />
                     ))}

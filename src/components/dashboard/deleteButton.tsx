@@ -3,9 +3,10 @@
 type Props = {
     id: number;
     type: "revenue" | "expense";
+    onDeleted: (id: number, type: "revenue" | "expense") => void;
 };
 
-export const DeleteButton = ({ id, type }: Props) => {
+export const DeleteButton = ({ id, type, onDeleted }: Props) => {
 
     const handleDelete = async () => {
 
@@ -18,11 +19,14 @@ export const DeleteButton = ({ id, type }: Props) => {
         });
 
         if (!response.ok) {
-            console.log("Erro ao excluir");
+            const error = await response.json();
+            console.log("Erro ao excluir",error);
             return;
         }
 
         console.log("STATUS DELETE:", response.status);
+
+        onDeleted(id, type);
     }
 
     return (
