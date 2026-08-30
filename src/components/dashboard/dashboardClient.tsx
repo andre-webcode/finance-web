@@ -23,6 +23,7 @@ const formatDate = (date: string) => {
 export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     const [revenuesState, setRevenuesState] = useState(revenues);
     const [expensesState, setExpensesState] = useState(expenses);
+    const [message, setMessage] = useState("");
 
     const handleRevenueCreated = (revenue: Revenue) => {
         setRevenuesState((currentRevenues) => [
@@ -50,6 +51,14 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                 currentExpenses.filter((expense) => expense.id !== id)
             );
         }
+
+        setMessage(
+            type === "revenue" ? "Receita excluida com sucesso!" :  "Despesa excluída com sucesso!"
+        )
+
+        setTimeout(()=>{
+            setMessage("");
+        },3000);
     };
 
 
@@ -86,6 +95,12 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
     return (
         <div className=" mx-auto max-w-6xl px-4">
+            {message && (
+                <div className="fixed right-4 top-4 z-50 rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-400 shadow-lg">
+                    {message}
+                </div>
+            )}
+
             <header className="flex items-center justify-between border-b border-zinc-800 py-6">
 
                 <h1 className="text-2xl font-bold text-purple-400">Finance</h1>
