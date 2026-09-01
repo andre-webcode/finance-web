@@ -24,6 +24,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     const [revenuesState, setRevenuesState] = useState(revenues);
     const [expensesState, setExpensesState] = useState(expenses);
     const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState<"success" | "error">("success");
 
     const handleRevenueCreated = (revenue: Revenue) => {
         setRevenuesState((currentRevenues) => [
@@ -52,15 +53,21 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
             );
         }
 
+        setMessageType("success");
+
         setMessage(
-            type === "revenue" ? "Receita excluida com sucesso!" :  "Despesa excluída com sucesso!"
+            type === "revenue" ? "Receita excluida com sucesso!" : "Despesa excluída com sucesso!"
         )
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setMessage("");
-        },3000);
+        }, 3000);
     };
 
+    const handleError = (message: string) => {
+        setMessageType("error");
+        setMessage(message);
+    };
 
     const transactions = [
         ...revenuesState.map((revenue) => ({
@@ -96,7 +103,10 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     return (
         <div className=" mx-auto max-w-6xl px-4">
             {message && (
-                <div className="fixed right-4 top-4 z-50 rounded-lg border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm text-green-400 shadow-lg">
+                <div className={`fixed right-4 top-4 z-50 rounded-lg  px-4 py-3 text-sm shadow-lg ${messageType === "success"
+                        ? "border-green-500/30 bg-green-500/10 text-green-400"
+                        : "border-red-500/30 bg-red-500/10 text-red-400"
+                    }`}>
                     {message}
                 </div>
             )}
@@ -167,6 +177,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                             value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
                             type={transaction.type}
                             onDeleted={handleDeleted}
+                            onError={handleError}
 
                         />
                     ))}

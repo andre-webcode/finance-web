@@ -7,9 +7,10 @@ type Props = {
     value: string;
     type: "revenue" | "expense";
     onDeleted: (id: number, type: "revenue" | "expense") => void;
+    onError: (message: string) => void;
 }
 
-export const TransactionsItem = ({ id, description, date, value, type,onDeleted }: Props) => {
+export const TransactionsItem = ({ id, description, date, value, type, onDeleted, onError }: Props) => {
 
 
 
@@ -34,6 +35,7 @@ export const TransactionsItem = ({ id, description, date, value, type,onDeleted 
                     id={id}
                     type={type}
                     onDeleted={onDeleted}
+                    onError={onError}
                 />
             </div>
         </div>
