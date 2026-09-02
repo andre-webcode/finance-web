@@ -19,16 +19,16 @@ export const RevenueForm = ({ onRevenueCreated }: Props) => {
         e.preventDefault();
 
         if (!date) {
-           alert("informe a data");
+            alert("informe a data");
             return;
         }
-        
-       
+
+
         try {
             const formattedDate = new Date(`${date}T00:00:00`);
-           
 
-           
+
+
             const res = await fetch("/api/revenues", {
                 method: 'POST',
                 headers: {
@@ -50,8 +50,13 @@ export const RevenueForm = ({ onRevenueCreated }: Props) => {
             if (!res.ok) {
                 return;
             }
-            
+
             onRevenueCreated(data);
+
+            setDescription("");
+            setValue("");
+            setCategory("");
+            setDate("");
 
         } catch (error) {
             console.error("Erro ao criar receita:", error);
@@ -69,7 +74,7 @@ export const RevenueForm = ({ onRevenueCreated }: Props) => {
                 className="mt-4 flex w-full flex-col items-center  rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm lg:flex-row md:p-4">
 
                 <div className="w-full flex flex-col items-center gap-3 sm:flex-row ">
-                    
+
                     <div className="w-full flex flex-col sm:flex-1">
                         <label
                             htmlFor="description"

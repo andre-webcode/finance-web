@@ -8,3 +8,8 @@ export type Transaction = {
 
 export type Revenue = Transaction;
 export type Expense = Transaction;
+
+
+export type SelectedTransaction = (Revenue | Expense) & {
+    type: "revenue" | "expense"
+}

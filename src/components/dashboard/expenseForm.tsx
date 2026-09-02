@@ -5,9 +5,10 @@ import { useState } from "react"
 
 type Props = {
     onExpenseCreated: (expense: Expense) => void;
+   
 };
 
-export const ExpenseForm = ({ onExpenseCreated }: Props) => {
+export const ExpenseForm = ({ onExpenseCreated}: Props) => {
     const [description, setDescription] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
@@ -45,8 +46,14 @@ export const ExpenseForm = ({ onExpenseCreated }: Props) => {
             if (!res.ok) {
                 return;
             }
-            
+
             onExpenseCreated(data);
+
+            setDescription("");
+            setValue("");
+            setCategory("");
+            setDate("");
+           
 
         } catch (error) {
             console.error("Erro ao criar despesa:", error);

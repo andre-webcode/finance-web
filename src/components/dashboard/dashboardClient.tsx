@@ -4,9 +4,9 @@ import { LogoutButton } from "./logoutButton";
 import { TransactionsItem } from "./transactionItem";
 import { RevenueForm } from "./revenueForm";
 import { ExpenseForm } from "./expenseForm";
-import { DashboardLayout } from "./dashboardLayout";
 import { useState } from "react";
-import { Revenue, Expense } from "@/types/finance";
+import { Revenue, Expense, SelectedTransaction } from "@/types/finance";
+import { EditModal } from "./editModal";
 
 type Props = {
     revenues: Revenue[];
@@ -25,6 +25,8 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     const [expensesState, setExpensesState] = useState(expenses);
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState<"success" | "error">("success");
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState<SelectedTransaction | null>(null);
 
     const handleRevenueCreated = (revenue: Revenue) => {
         setRevenuesState((currentRevenues) => [
@@ -64,10 +66,22 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
         }, 3000);
     };
 
+    const handleEdit = (transaction: SelectedTransaction) => {
+        setSelectedTransaction(transaction);
+        setIsEditModalOpen(true);
+    }
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+    }
+
+
     const handleError = (message: string) => {
         setMessageType("error");
         setMessage(message);
     };
+
+
 
     const transactions = [
         ...revenuesState.map((revenue) => ({
@@ -100,12 +114,14 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
     const balance = totalRevenue - totalExpense;
 
 
+
+
     return (
         <div className=" mx-auto max-w-6xl px-4">
             {message && (
                 <div className={`fixed right-4 top-4 z-50 rounded-lg  px-4 py-3 text-sm shadow-lg ${messageType === "success"
-                        ? "border-green-500/30 bg-green-500/10 text-green-400"
-                        : "border-red-500/30 bg-red-500/10 text-red-400"
+                    ? "border-green-500/30 bg-green-500/10 text-green-400"
+                    : "border-red-500/30 bg-red-500/10 text-red-400"
                     }`}>
                     {message}
                 </div>
@@ -178,12 +194,21 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                             type={transaction.type}
                             onDeleted={handleDeleted}
                             onError={handleError}
+                            onEdit={handleEdit}
+                            transaction={transaction}
 
                         />
                     ))}
                 </div>
 
             </section>
+
+            {isEditModalOpen &&
+                <EditModal
+                    onClose={handleCloseEditModal}
+                    transaction={selectedTransaction}
+
+                />}
 
         </div>
     );

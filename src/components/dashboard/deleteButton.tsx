@@ -35,7 +35,7 @@ export const DeleteButton = ({ id, type, onDeleted,onError }: Props) => {
     return (
         <button
             onClick={handleDelete}
-            className="cursor-point"
+            className="cursor-pointer"
         >
             Excluir
         </button>
