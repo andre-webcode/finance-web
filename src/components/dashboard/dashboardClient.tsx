@@ -1,6 +1,5 @@
 "use client";
 
-import { LogoutButton } from "./logoutButton";
 import { TransactionsItem } from "./transactionItem";
 import { RevenueForm } from "./revenueForm";
 import { ExpenseForm } from "./expenseForm";
@@ -148,15 +147,8 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
                 <header className="flex items-center justify-between border-b border-orange-primary py-6">
 
-                    <h1 className="text-2xl font-bold text-orange-primary">Finance</h1>
+                    <h1 className="text-2xl font-bold text-orange-primary md:hidden">Finance</h1>
 
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm text-gray-text">
-                            {email}
-                        </span>
-
-                        <LogoutButton />
-                    </div>
                 </header>
 
                 <section className="mt-6 grid gap-4 lg:grid-cols-3">

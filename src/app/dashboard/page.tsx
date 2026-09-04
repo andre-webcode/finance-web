@@ -56,9 +56,9 @@ const Dashboard = async () => {
 
 
     return (
-        <main className="min-h-screen bg-zinc-950 text-white">
+        <main className="min-h-screen bg-gray-light">
 
-            <DashboardLayout>
+            <DashboardLayout email={String(payload.email)}>
 
                 <DashboardClient
                     revenues={revenues}

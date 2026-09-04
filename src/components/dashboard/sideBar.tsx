@@ -7,9 +7,10 @@ import { LogoutButton } from "./logoutButton";
 
 type Props = {
     isOpen: boolean;
+    email: string;
 }
 
-export const SideBar = ({ isOpen }: Props) => {
+export const SideBar = ({ isOpen, email }: Props) => {
     const pathname = usePathname();
 
     const navItems = [
@@ -64,10 +65,14 @@ export const SideBar = ({ isOpen }: Props) => {
                 </ul>
             </nav>
 
-            <div className="mt-auto">
+            <div className="mt-auto flex items-center gap-5">
+                <span className="min-w-0 flex-1 truncate text-sm text-gray-500">
+                    {email}
+                </span>
+
                 <LogoutButton />
             </div>
-           
+
         </aside>
     )
 }

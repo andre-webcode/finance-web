@@ -11,7 +11,7 @@ export const MenuButton = ({ onClick }: Props) => {
         <button
             type="button"
             onClick={onClick}
-            className="rounded-lg p-2 hover:bg-zinc-800 md:hidden"
+            className="rounded-lg bg-orange-primary p-2 text-white hover:bg-orange-dark md:hidden"
         >
             <Menu size={24} />
         </button>
