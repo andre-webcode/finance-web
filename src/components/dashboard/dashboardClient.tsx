@@ -88,7 +88,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                     ? transaction
                     : item
             ));
-            
+
         } else {
             setExpensesState((prev) =>
                 prev.map((item) =>
@@ -135,101 +135,104 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
 
 
     return (
-        <div className=" mx-auto max-w-6xl px-4">
-            {message && (
-                <div className={`fixed right-4 top-4 z-50 rounded-lg  px-4 py-3 text-sm shadow-lg ${messageType === "success"
-                    ? "border-green-500/30 bg-green-500/10 text-green-400"
-                    : "border-red-500/30 bg-red-500/10 text-red-400"
-                    }`}>
-                    {message}
-                </div>
-            )}
+        <div className="min-h-screen bg-gray-light">
+            <div className=" mx-auto max-w-6xl px-4">
+                {message && (
+                    <div className={`fixed right-4 top-4 z-50 rounded-lg  px-4 py-3 text-sm shadow-lg ${messageType === "success"
+                        ? "border-green-500/30 bg-green-500/10 text-green-400"
+                        : "border-red-500/30 bg-red-500/10 text-red-400"
+                        }`}>
+                        {message}
+                    </div>
+                )}
 
-            <header className="flex items-center justify-between border-b border-zinc-800 py-6">
+                <header className="flex items-center justify-between border-b border-orange-primary py-6">
 
-                <h1 className="text-2xl font-bold text-purple-400">Finance</h1>
+                    <h1 className="text-2xl font-bold text-orange-primary">Finance</h1>
 
-                <div className="flex items-center gap-4">
-                    <span className="text-sm text-zinc-400">
-                        {email}
-                    </span>
+                    <div className="flex items-center gap-4">
+                        <span className="text-sm text-gray-text">
+                            {email}
+                        </span>
 
-                    <LogoutButton />
-                </div>
-            </header>
+                        <LogoutButton />
+                    </div>
+                </header>
 
-            <section className="grid gap-4 lg:grid-cols-3">
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 ">
-                    <p className="text-sm text-gray-500">
-                        Saldo atual
-                    </p>
-                    <strong className="mt-2 block text-3xl font-bold text-purple-400">
-                        R$ {balance.toFixed(2)}
-                    </strong>
-                    <p className="mt-1 text-sm text-zinc-500">
-                        Suas finanças em um só lugar
-                    </p>
-                </div>
+                <section className="mt-6 grid gap-4 lg:grid-cols-3">
 
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-                    <p className="text-sm text-zinc-400">
-                        Receitas
-                    </p>
-                    <strong className="mt-2 block text-2xl font-bold text-green-400">
-                        R$ {totalRevenue.toFixed(2)}
-                    </strong>
-                </div>
+                    <div className="rounded-xl bg-orange-primary border border-orange-dark p-6 shadow-lg transition hover:shadow-xl">
+                        <p className="text-sm text-orange-light">
+                            Saldo atual
+                        </p>
+                        <strong className="mt-2 block text-3xl font-bold text-white">
+                            R$ {balance.toFixed(2)}
+                        </strong>
+                        <p className="mt-1 text-sm text-orange-light">
+                            Suas finanças em um só lugar
+                        </p>
+                    </div>
 
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
-                    <p className="text-sm text-gray-500">
-                        Despesas
-                    </p>
-                    <strong className="mt-2 block text-2xl font-bold text-red-400">
-                        R$ {totalExpense.toFixed(2)}
-                    </strong>
-                </div>
-            </section>
+                    <div className="rounded-xl border border-gray-light bg-white p-6 shadow-sm transition hover:shadow-md">
+                        <p className="text-sm text-gray-500">
+                            Receitas
+                        </p>
+                        <strong className="mt-2 block text-2xl font-bold text-green-600">
+                            R$ {totalRevenue.toFixed(2)}
+                        </strong>
+                    </div>
 
-            <RevenueForm onRevenueCreated={handleRevenueCreated} />
+                    <div className="rounded-xl border border-gray-light bg-white p-6 shadow-sm transition hover:shadow-md">
+                        <p className="text-sm text-gray-500">
+                            Despesas
+                        </p>
+                        <strong className="mt-2 block text-2xl font-bold text-red-600">
+                            R$ {totalExpense.toFixed(2)}
+                        </strong>
+                    </div>
+                </section>
 
-            <ExpenseForm onExpenseCreated={handleExpenseCreated} />
+                <RevenueForm onRevenueCreated={handleRevenueCreated} />
 
-            <hr className="my-8 border-zinc-800" />
+                <ExpenseForm onExpenseCreated={handleExpenseCreated} />
 
-            <section className="w-full mt-8 mb-10">
-                <h2 className="text-xl font-semibold text-center text-zinc-100">
-                    Ultimas movimentações
-                </h2>
+                <hr className="my-8 border-gray-light" />
 
-                <div className="mt-4 rounded-xl border border-zinc-800 bg-zinc-900 p-6 mx-auto">
-                    {latestTransactions.map((transaction) => (
-                        <TransactionsItem
-                            key={`${transaction.type}-${transaction.id}`}
-                            id={transaction.id}
-                            description={transaction.description}
-                            date={formatDate(transaction.date)}
-                            value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
-                            type={transaction.type}
-                            onDeleted={handleDeleted}
-                            onError={handleError}
-                            onEdit={handleEdit}
-                            transaction={transaction}
+                <section className="w-full mt-8 mb-10">
+                    <h2 className="text-xl font-semibold text-center text-gray-text">
+                        Ultimas movimentações
+                    </h2>
+
+                    <div className="mt-4 rounded-xl border border-gray-light bg-white p-6 mx-auto shadow-sm">
+                        {latestTransactions.map((transaction) => (
+                            <TransactionsItem
+                                key={`${transaction.type}-${transaction.id}`}
+                                id={transaction.id}
+                                description={transaction.description}
+                                date={formatDate(transaction.date)}
+                                value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
+                                type={transaction.type}
+                                onDeleted={handleDeleted}
+                                onError={handleError}
+                                onEdit={handleEdit}
+                                transaction={transaction}
 
 
-                        />
-                    ))}
-                </div>
+                            />
+                        ))}
+                    </div>
 
-            </section>
+                </section>
 
-            {isEditModalOpen &&
-                <EditModal
-                    onClose={handleCloseEditModal}
-                    transaction={selectedTransaction}
-                    onUpdated={handleUpdated}
+                {isEditModalOpen &&
+                    <EditModal
+                        onClose={handleCloseEditModal}
+                        transaction={selectedTransaction}
+                        onUpdated={handleUpdated}
 
-                />}
+                    />}
 
+            </div>
         </div>
     );
 };

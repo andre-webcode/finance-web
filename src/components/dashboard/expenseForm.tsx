@@ -62,20 +62,20 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
 
     return (
         <section className="mt-8">
-            <h2 className="text-xl font-semibold text-center text-zinc-100">
+            <h2 className="text-xl font-semibold text-center text-gray-text">
                 Nova despesa
             </h2>
 
             <form
                 onSubmit={handleSubmit}
-                className="mt-4 flex w-full flex-col items-center rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm lg:flex-row md:p-4"
+                className="mt-4 flex w-full flex-col items-center rounded-xl border border-gray-light bg-white p-6 shadow-sm lg:flex-row md:p-4"
             >
                 <div className="w-full flex flex-col items-center gap-3 sm:flex-row">
 
                     <div className="w-full flex flex-col sm:flex-1">
                         <label
                             htmlFor="description"
-                            className="mb-2 block text-sm font-medium text-zinc-300"
+                            className="mb-2 block text-sm font-medium text-gray-text"
                         >
                             Descrição
                         </label>
@@ -85,14 +85,14 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
                             placeholder="Descrição"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            className="w-full outline-none border px-2 py-2 rounded-lg overflow-hidden"
+                            className="w-full outline-none border border-gray-light bg-white px-2 py-2 rounded-lg transition focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                         />
                     </div>
 
                     <div className="flex w-full flex-col sm:w-24 md:w-28 lg:w-36">
                         <label
                             htmlFor="value"
-                            className="mb-2 block text-sm font-medium text-zinc-300"
+                            className="mb-2 block text-sm font-medium text-gray-text"
                         >
                             Valor
                         </label>
@@ -102,14 +102,14 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
                             placeholder="100"
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
-                            className="w-full rounded-lg border px-2 py-2 outline-none "
+                            className="w-full rounded-lg border border-gray-light bg-white px-2 py-2 outline-none transition focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                         />
                     </div>
 
                     <div className="flex w-full flex-col sm:w-24 md:w-28 lg:w-40">
                         <label
                             htmlFor="category"
-                            className="mb-2 block text-sm font-medium text-zinc-300"
+                            className="mb-2 block text-sm font-medium text-gray-text"
                         >
                             Categoria
                         </label>
@@ -119,14 +119,14 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
                             placeholder="Ex: Mercado"
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full rounded-lg border px-2 py-2 outline-none"
+                            className="w-full rounded-lg border border-gray-light bg-white px-2 py-2 outline-none transition focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                         />
                     </div>
 
-                    <div className="flex w-full flex-col sm:w-24 md:w-28 lg:w-36">
+                    <div className="flex w-full flex-col sm:w-36 md:w-40 lg:w-44">
                         <label
                             htmlFor="date"
-                            className="mb-2 block text-sm font-medium text-zinc-300"
+                            className="mb-2 block text-sm font-medium text-gray-text"
                         >
                             Data
                         </label>
@@ -135,7 +135,7 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
                             type="date"
                             value={date}
                             onChange={(e) => setDate(e.target.value)}
-                            className="w-full rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-2 outline-none focus:border-purple-500 [&::-webkit-calendar-picker-indicator]:invert"
+                            className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-2 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                         />
                     </div>
                 </div>
@@ -143,7 +143,7 @@ export const ExpenseForm = ({ onExpenseCreated}: Props) => {
                 <div className="flex md:mt-4 md:self-end w-full justify-center lg:w-auto">
                     <button
                         type="submit"
-                        className="bg-purple-600 hover:bg-purple-700 p-2 px-4 rounded-md mt-4 font-semibold text-white md:m-0 md:ml-3"
+                        className="bg-orange-primary hover:bg-orange-dark p-2 px-4 rounded-md mt-4 font-semibold text-white md:m-0 md:ml-3"
                     >
                         Adicionar
                     </button>

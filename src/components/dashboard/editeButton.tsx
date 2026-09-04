@@ -16,7 +16,7 @@ export const EditeButton = ({ id, type, onEdit, transaction }: Props) => {
 
     }
     return (
-        <button onClick={handleEdit} className="cursor-pointer">
+        <button onClick={handleEdit} className="cursor-pointer px-3 py-1 rounded-md border border-orange-primary text-orange-primary transition hover:text-orange-dark">
             Editar
         </button>
     )

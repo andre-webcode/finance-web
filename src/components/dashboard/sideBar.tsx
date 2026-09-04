@@ -31,9 +31,9 @@ export const SideBar = ({ isOpen }: Props) => {
     ]
 
     return (
-        <aside className={`fixed left-0 top-0 z-50 flex h-screen flex-col w-64 border-r  border-zinc-800 p-6 bg-zinc-950 text-white transition-transform duration-300
+        <aside className={`fixed left-0 top-0 z-50 flex h-screen flex-col w-64 border-r  border-gray-light p-6 bg-white text-gray-text transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
-            <h2 className="text-xl font-bold text-purple-400">
+            <h2 className="text-xl font-bold text-orange-primary">
                 Finance
             </h2>
 
@@ -48,8 +48,8 @@ export const SideBar = ({ isOpen }: Props) => {
                                 <Link
                                     href={item.href}
                                     className={`flex items-center gap-3 rounded-lg px-3 py-2 ${pathname === item.href
-                                        ? "bg-purple-600"
-                                        : "hover:bg-zinc-800"
+                                        ? "bg-orange-primary text-white"
+                                        : "hover:bg-gray-light transition"
                                         }`}
                                 >
                                     <Icon size={20} />
