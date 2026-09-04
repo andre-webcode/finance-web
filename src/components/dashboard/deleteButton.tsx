@@ -12,8 +12,8 @@ export const DeleteButton = ({ id, type, onDeleted,onError }: Props) => {
     const handleDelete = async () => {
 
         const endpoint = type === "revenue"
-            ? `/api/revenues/${999}`
-            : `/api/expenses/${999}`;
+            ? `/api/revenues/${id}`
+            : `/api/expenses/${id}`;
 
         const response = await fetch(endpoint, {
             method: "DELETE",

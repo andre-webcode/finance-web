@@ -81,6 +81,24 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
         setMessage(message);
     };
 
+    const handleUpdated = (transaction: SelectedTransaction) => {
+        if (transaction.type === "revenue") {
+            setRevenuesState((prev) => prev.map((item) =>
+                item.id === transaction.id
+                    ? transaction
+                    : item
+            ));
+            
+        } else {
+            setExpensesState((prev) =>
+                prev.map((item) =>
+                    item.id === transaction.id
+                        ? transaction
+                        : item
+                )
+            );
+        }
+    };
 
 
     const transactions = [
@@ -197,6 +215,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                             onEdit={handleEdit}
                             transaction={transaction}
 
+
                         />
                     ))}
                 </div>
@@ -207,6 +226,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                 <EditModal
                     onClose={handleCloseEditModal}
                     transaction={selectedTransaction}
+                    onUpdated={handleUpdated}
 
                 />}
 
