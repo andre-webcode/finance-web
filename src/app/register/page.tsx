@@ -38,9 +38,9 @@ const Register = () => {
     }
 
     return (
-        <main className="min-h-screen flex items-center justify-center bg-linear-to-br from-zinc-950 via-zinc-900 to-purple-950">
-            <div className="w-full max-w-sm rounded-xl p-8  bg-zinc-900/80 border border-zinc-800 shadow-xl">
-                <h1 className="text-3xl font-bold text-center mb-6">
+        <main className="min-h-screen flex items-center justify-center bg-gray-light">
+            <div className="w-full max-w-sm rounded-2xl p-8 border border-gray-light bg-white shadow-xl">
+                <h1 className="text-3xl font-bold text-center text-orange-primary mb-6">
                     Criar conta
                 </h1>
 
@@ -52,23 +52,23 @@ const Register = () => {
                         placeholder="Nome"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                     />
 
                     <input type="email"
                         placeholder="E-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
                     />
 
                     <input type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full rounded-lg border px-4 py-2 outline-none focus:ring-2 focus:ring-blue-500" />
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20" />
 
-                    <button type="submit" className="bg-purple-600 hover:bg-purple-700 w-full rounded-lg py-2 font-semibold text-white">
+                    <button type="submit" className="bg-orange-primary transition hover:bg-orange-dark w-full rounded-lg py-2 font-semibold text-white">
                         Cadastrar
                     </button>
                 </form>

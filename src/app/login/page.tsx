@@ -66,12 +66,12 @@ const Login = () => {
                     />
 
                     <button
-                        className="bg-orange-primary transition hover:bg-orange-dar w-full rounded-lg py-2 font-semibold text-white"
+                        className="bg-orange-primary transition hover:bg-orange-dark w-full rounded-lg py-2 font-semibold text-white"
                         type="submit">
                         Entrar
                     </button>
-                    <p className="mt-4 text-center">
-                        Ainda não possiu uma conta? <a href="/register" className="font-semibold text-orange-primary underline transition hover:text-orange-dark">Criar conta</a>
+                    <p className="mt-4 text-center text-gray-400">
+                        Ainda não possui uma conta? <a href="/register" className="font-semibold text-orange-primary underline transition hover:text-orange-dark">Criar conta</a>
                     </p>
                 </form>
             </div>
