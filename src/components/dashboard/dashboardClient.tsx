@@ -1,11 +1,10 @@
 "use client";
 
 import { TransactionsItem } from "./transactionItem";
-import { RevenueForm } from "./revenueForm";
-import { ExpenseForm } from "./expenseForm";
 import { useState } from "react";
 import { Revenue, Expense, SelectedTransaction } from "@/types/finance";
 import { EditModal } from "./editModal";
+import { TransactionForm } from "./transactionForm";
 
 type Props = {
     revenues: Revenue[];
@@ -74,6 +73,13 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
         setIsEditModalOpen(false);
     }
 
+    const handleTransactionCreated = (transaction: SelectedTransaction) => {
+        if (transaction.type === "revenue") {
+            setRevenuesState((prev) => [...prev, transaction]);
+        } else {
+            setExpensesState((prev) => [...prev, transaction]);
+        }
+    };
 
     const handleError = (message: string) => {
         setMessageType("error");
@@ -184,9 +190,9 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                     </div>
                 </section>
 
-                <RevenueForm onRevenueCreated={handleRevenueCreated} />
-
-                <ExpenseForm onExpenseCreated={handleExpenseCreated} />
+                <TransactionForm
+                    onCreated={handleTransactionCreated}
+                />
 
                 <hr className="my-8 border-gray-light" />
 
