@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finance — Frontend
 
-## Getting Started
+Interface web de um sistema financeiro desenvolvido com **Next.js**, permitindo ao usuário acompanhar e gerenciar suas receitas e despesas.
 
-First, run the development server:
+O frontend se comunica com uma API própria desenvolvida separadamente para realizar a autenticação e as operações financeiras.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Funcionalidades
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* Cadastro de usuário
+* Login
+* Autenticação de usuário
+* Dashboard financeiro
+* Visualização do saldo atual
+* Visualização do total de receitas
+* Visualização do total de despesas
+* Cadastro de receitas
+* Cadastro de despesas
+* Listagem das últimas movimentações
+* Edição de movimentações
+* Exclusão de movimentações
+* Página exclusiva para receitas
+* Página exclusiva para despesas
+* Formatação de valores em Real brasileiro
+* Interface responsiva
+* Sidebar responsiva
+* Modal para edição de movimentações
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tecnologias
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Lucide React
 
-## Learn More
+## Interface
 
-To learn more about Next.js, take a look at the following resources:
+O sistema possui uma interface desenvolvida com foco em simplicidade, organização e responsividade.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Login
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tela de autenticação para acesso ao sistema.
 
-## Deploy on Vercel
+### Dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O dashboard apresenta:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Saldo atual
+* Total de receitas
+* Total de despesas
+* Últimas movimentações
+* Formulário para cadastro de receitas e despesas
+
+### Receitas
+
+Página destinada à visualização das receitas cadastradas e do total de receitas.
+
+### Despesas
+
+Página destinada à visualização das despesas cadastradas e do total de despesas.
+
+## Organização
+
+O frontend utiliza componentes reutilizáveis para facilitar a manutenção e organização da aplicação.
+
+Entre eles estão componentes responsáveis por:
+
+* Dashboard
+* Sidebar
+* Formulários
+* Movimentações
+* Modal de edição
+* Botões de edição e exclusão
+* Logout
+
+## Comunicação com a API
+
+O frontend realiza requisições HTTP para o backend responsável pela aplicação.
+
+A comunicação envolve operações como:
+
+* Autenticação
+* Criação de receitas
+* Criação de despesas
+* Consulta de movimentações
+* Atualização de movimentações
+* Exclusão de movimentações
+
+
+## Objetivo
+
+Este projeto foi desenvolvido como parte da minha evolução como desenvolvedor Full Stack, colocando em prática conhecimentos de **React, Next.js, TypeScript, consumo de APIs, autenticação, CRUD e desenvolvimento de interfaces responsivas**.
+
+## Autor
+
+**Luiz André**
+
+Desenvolvedor Full Stack em formação.
