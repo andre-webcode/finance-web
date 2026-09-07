@@ -1,11 +1,8 @@
 import { verifyToken } from "@/libs/auth";
-import { ArrowLeft } from "lucide-react";
 import { cookies } from "next/headers";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
-
-type Revenue = {
+type Expense = {
     id: number;
     description: string;
     value: string;
@@ -13,7 +10,7 @@ type Revenue = {
     date: string;
 };
 
-const Revenues = async () => {
+const Expenses = async () => {
     const cookieStore = await cookies();
     const token = cookieStore.get("token");
 
@@ -27,41 +24,33 @@ const Revenues = async () => {
         redirect("/login");
     }
 
-    const response = await fetch("http://localhost:3001/revenues", {
+    const response = await fetch("http://localhost:3001/expense", {
         headers: {
             Authorization: `Bearer ${token.value}`,
         },
     });
 
-    const revenues: Revenue[] = await response.json();
+    const expenses: Expense[] = await response.json();
 
-    const totalRevenue = revenues.reduce(
-        (total, revenue) => total + Number(revenue.value), 0
-    )
+    const totalExpense = expenses.reduce(
+        (total, expense) => total + Number(expense.value),
+        0
+    );
 
     return (
         <main className="min-h-screen bg-gray-light">
             <div className="mx-auto max-w-6xl px-4 py-6">
-
-                <Link
-                    href="/dashboard"
-                    className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-gray-700"
-                >
-                    <ArrowLeft size={18} />
-                    Voltar
-                </Link>
-
                 <h1 className="text-2xl font-bold text-orange-primary">
-                    Minhas Receitas
+                    Minhas Despesas
                 </h1>
 
                 <section className="mt-6 rounded-xl border border-gray-light bg-white p-6 shadow-sm">
                     <p className="text-sm text-gray-500">
-                        Total de receitas
+                        Total de despesas
                     </p>
 
-                    <strong className="mt-2 block text-3xl font-bold text-green-600">
-                        {totalRevenue.toLocaleString("pt-BR", {
+                    <strong className="mt-2 block text-3xl font-bold text-red-600">
+                        {totalExpense.toLocaleString("pt-BR", {
                             style: "currency",
                             currency: "BRL",
                         })}
@@ -70,31 +59,33 @@ const Revenues = async () => {
 
                 <section className="mt-6 rounded-xl border border-gray-light bg-white p-6 shadow-sm">
                     <h2 className="text-xl font-semibold text-gray-text">
-                        Todas as receitas
+                        Todas as despesas
                     </h2>
 
                     <div className="mt-4">
-                        {revenues.map((revenue) => (
-                            <div key={revenue.id}
+                        {expenses.map((expense) => (
+                            <div
+                                key={expense.id}
                                 className="mt-3 rounded-lg border border-gray-light bg-gray-light/30 px-4 py-3"
                             >
+                                <p className="font-semibold text-gray-text">
+                                    {expense.description}
+                                </p>
 
-                                <p className="font-semibold text-gray-text">
-                                    {revenue.description}
+                                <p className="text-sm text-gray-500">
+                                    {expense.category}
                                 </p>
-                                <p className="font-semibold text-gray-text">
-                                    {revenue.category}
+
+                                <p className="text-sm text-gray-500">
+                                    {new Date(expense.date).toLocaleDateString("pt-BR")}
                                 </p>
-                                <p className="font-semibold text-gray-text">
-                                    {new Date(revenue.date).toLocaleDateString("pt-BR")}
-                                </p>
-                                <p className="text-green-600">
-                                    {Number(revenue.value).toLocaleString("pt-BR", {
+
+                                <strong className="text-red-600">
+                                    {Number(expense.value).toLocaleString("pt-BR", {
                                         style: "currency",
                                         currency: "BRL",
                                     })}
-                                </p>
-
+                                </strong>
                             </div>
                         ))}
                     </div>
@@ -104,4 +95,4 @@ const Revenues = async () => {
     );
 };
 
-export default Revenues;
+export default Expenses;
