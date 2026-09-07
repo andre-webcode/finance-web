@@ -1,5 +1,7 @@
 import { verifyToken } from "@/libs/auth";
+import { ArrowLeft } from "lucide-react";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 type Expense = {
@@ -40,6 +42,15 @@ const Expenses = async () => {
     return (
         <main className="min-h-screen bg-gray-light">
             <div className="mx-auto max-w-6xl px-4 py-6">
+
+                <Link
+                    href="/dashboard"
+                    className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-gray-500 transition hover:text-gray-700"
+                >
+                    <ArrowLeft size={18} />
+                    Voltar
+                </Link>
+
                 <h1 className="text-2xl font-bold text-orange-primary">
                     Minhas Despesas
                 </h1>

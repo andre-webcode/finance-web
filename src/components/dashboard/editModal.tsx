@@ -24,8 +24,7 @@ export const EditModal = ({ onClose, transaction, onUpdated }: Props) => {
             setDate(transaction.date);
         }
     }, [transaction]);
-
-
+    
     const handleSubmit = async () => {
 
 
@@ -33,18 +32,7 @@ export const EditModal = ({ onClose, transaction, onUpdated }: Props) => {
             return;
         }
 
-        console.log("DATA:", date);
-        console.log("DATA COMPLETA:", `${date}T00:00:00`);
         const formattedDate = new Date(`${date}T00:00:00`).toISOString();
-        console.log("DATA FORMATADA:", formattedDate);
-
-        console.log("DADOS ENVIADOS:", {
-            description,
-            value,
-            category,
-            date,
-        });
-       
 
         const endpoint = transaction?.type === "revenue"
             ? `/api/revenues/${transaction.id}`
@@ -68,7 +56,6 @@ export const EditModal = ({ onClose, transaction, onUpdated }: Props) => {
         }
 
         const data = await res.json();
-        console.log("RESPOSTA DO PUT:", data);
 
         const updatedTransaction: SelectedTransaction = {
             ...data,
@@ -81,9 +68,10 @@ export const EditModal = ({ onClose, transaction, onUpdated }: Props) => {
 
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/70">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/70">
             <div className="relative w-full max-w-md rounded-lg bg-white p-5">
-                <button className="absolute -top-3 -right-3 cursor-pointer font-bold " onClick={onClose}>
+                <button className="absolute -top-3 -right-3 cursor-pointer font-bold "
+                 onClick={onClose}>
                     X
                 </button>
                 <h2 className="text-xl font-bold">
