@@ -60,7 +60,7 @@ export const TransactionForm = ({ onCreated }: Props) => {
 
     return (
         <section>
-            <h2 className="text-xl font-semibold text-gray-text">
+            <h2 className="mt-8 text-xl font-semibold text-gray-text">
                 {type === "revenue" ? "Nova receita" : "Nova despesa"}
             </h2>
 
