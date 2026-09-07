@@ -52,21 +52,21 @@ const Register = () => {
                         placeholder="Nome"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none "
                     />
 
                     <input type="email"
                         placeholder="E-mail"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none "
                     />
 
                     <input type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20" />
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none " />
 
                     <button type="submit" className="bg-orange-primary transition hover:bg-orange-dark w-full rounded-lg py-2 font-semibold text-white">
                         Cadastrar

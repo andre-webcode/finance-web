@@ -2,7 +2,6 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { Router } from "next/router";
 import { useState } from "react";
 
 
@@ -54,14 +53,14 @@ const Login = () => {
                         placeholder="E-mail"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none "
                     />
 
                     <input type="password"
                         placeholder="Senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none focus:border-orange-primary focus:ring-2 focus:ring-orange-primary/20"
+                        className="w-full rounded-lg border border-gray-light bg-white text-gray-text px-4 py-2 outline-none "
 
                     />
 

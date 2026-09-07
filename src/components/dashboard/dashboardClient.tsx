@@ -208,7 +208,7 @@ export const DashboardClient = ({ revenues, expenses, email }: Props) => {
                                 id={transaction.id}
                                 description={transaction.description}
                                 date={formatDate(transaction.date)}
-                                value={`${transaction.type === "revenue" ? "+" : "-"} R$ ${transaction.value}`}
+                                value={transaction.value}
                                 type={transaction.type}
                                 onDeleted={handleDeleted}
                                 onError={handleError}

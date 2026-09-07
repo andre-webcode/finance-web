@@ -1,4 +1,4 @@
-import { SelectedTransaction, Transaction } from "@/types/finance";
+import { SelectedTransaction } from "@/types/finance";
 import { DeleteButton } from "./deleteButton";
 import { EditeButton } from "./editeButton";
 
@@ -15,8 +15,11 @@ type Props = {
 }
 
 export const TransactionsItem = ({ id, description, date, value, type, onDeleted, onError, onEdit, transaction }: Props) => {
-
-
+    console.log("VALUE:", value);
+const formattedValue = Number(value).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+})
 
     return (
         <div className="mt-3 rounded-lg border border-gray-light bg-gray-light/30 px-4 py-3 shadow-sm transition hover:shadow-md">
@@ -32,7 +35,7 @@ export const TransactionsItem = ({ id, description, date, value, type, onDeleted
                 </div>
 
                 <strong className={type === "revenue" ? "whitespace-nowrap font-bold text-green-600" : "whitespace-nowrap font-bold text-red-600"}>
-                    {value}
+                    {formattedValue}
                 </strong>
 
                 <div className="mt-2 flex items-center gap-6 sm:mt-0">
