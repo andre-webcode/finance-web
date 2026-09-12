@@ -4,7 +4,7 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
-        const response = await fetch("http://localhost:3001/signin", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

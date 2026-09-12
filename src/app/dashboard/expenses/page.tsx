@@ -26,7 +26,7 @@ const Expenses = async () => {
         redirect("/login");
     }
 
-    const response = await fetch("http://localhost:3001/expense", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expense`, {
         headers: {
             Authorization: `Bearer ${token.value}`,
         },

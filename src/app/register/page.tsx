@@ -14,7 +14,7 @@ const Register = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:3001/signup", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
                 method: "POST",
                 headers: {
                     'content-Type': "application/json",

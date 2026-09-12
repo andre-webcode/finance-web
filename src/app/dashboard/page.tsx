@@ -38,7 +38,7 @@ const Dashboard = async () => {
         redirect("/login");
     }
 
-    const response = await fetch("http://localhost:3001/revenues", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/revenues`, {
         headers: {
             Authorization: `Bearer ${token.value}`,
         },
@@ -46,7 +46,7 @@ const Dashboard = async () => {
 
     const revenues: Revenue[] = await response.json();
 
-    const expenseResponse = await fetch("http://localhost:3001/expense", {
+    const expenseResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expense`, {
         headers: {
             Authorization: `Bearer ${token.value}`,
         },

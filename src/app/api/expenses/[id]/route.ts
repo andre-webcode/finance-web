@@ -17,7 +17,7 @@ export async function DELETE(
         );
     }
 
-    const response = await fetch(`http://localhost:3001/expense/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expense/${id}`, {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${token.value}`,

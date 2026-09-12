@@ -15,7 +15,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const response = await fetch("http://localhost:3001/expense", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expense`,{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export async function GET() {
             );
         }
 
-        const response = await fetch("http://localhost:3001/expense", {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/expense`, {
             headers: {
                 Authorization: `Bearer ${token.value}`,
             },

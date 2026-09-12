@@ -17,7 +17,7 @@ export async function DELETE(
         );
     }
 
-    const response = await fetch(`http://localhost:3001/revenue/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/revenue/${id}`, {
         method: "DELETE",
         headers: {
             Authorization: `Bearer ${token.value}`,
@@ -49,7 +49,7 @@ export async function PUT(
         );
     }
 
-    const response = await fetch(`http://localhost:3001/revenue/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/revenue/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
